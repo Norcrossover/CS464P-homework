@@ -8,8 +8,8 @@ function palindromeAlgorithm(userInput) {
   let reversedNumber = 0;
 
   while (userInput > 0) {
-    userInput = reversedNumber * 10 + (userInput % 10);
-    reversedNumber = Math.floor(userInput / 10);
+    reversedNumber = reversedNumber * 10 + (userInput % 10);
+    userInput = Math.floor(userInput / 10);
   }
 
   return originalNumber === reversedNumber;
@@ -22,6 +22,11 @@ function isPalindrome(userInput) {
 }
 
 function handleInput(event) {
+  if (event.target.value === "") {
+    resultDiv.textContent = "";
+    return;
+  }
+
   const userInput = Number(event.target.value);
 
   if (isPalindrome(userInput)) {
