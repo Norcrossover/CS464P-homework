@@ -4,12 +4,6 @@ const resultDiv = document.querySelector('.result');
 elem.addEventListener('input', handleInput);
 
 function isPalindrome(userInput) {
-  if (typeof(userInput) != "number")
-    return false;
-
-  if (userInput < 0)
-    return false;
-  
   let orignalNumber = userInput;
   let reversedNumber = 0;
 
@@ -22,14 +16,27 @@ function isPalindrome(userInput) {
 }
 
 function handleInput(event) {
-  const userInput = Number(event.target.value);
   let msg = "";
+  let color = "";
+  const userInput = parseInt(event.target.value);
+  
+  if (typeof(userInput) != "number") {
+    msg = "No, the value entered is not a number, please enter a number.";
+    color = "red";
+  }
+
+  if (userInput < 0) {
+    msg = "No, you entered a negative number, please ensure that it is positive."
+    color = "red";
+  }
+
   if (isPalindrome(userInput)) {
     msg = "Yes. This is a palindrome!";
-    resultDiv.style.color = 'green';
+    color = 'green';
   } else {
     msg = "No. Try again.";
-    resultDiv.style.color = 'red';
+    color = 'red';
   }
   resultDiv.textContent = msg;
+  resultDiv.style.color = color;
 }
