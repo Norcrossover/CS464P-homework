@@ -12,30 +12,43 @@ function isPalindrome(userInput) {
     userInput = Math.floor(userInput / 10);
   }
 
-  return originalNumber === reversedNumber;
+  return orignalNumber === reversedNumber;
 }
 
 function isPalindrome(userInput) {
-  if (typeof userInput != "number") return false;
-  if (userInput < 0) return false;
   return palindromeAlgorithm(userInput);
 }
 
 function handleInput(event) {
+  // clear displayed messages when input is empty
   if (event.target.value === "") {
     resultDiv.textContent = "";
     return;
   }
 
+  let msg = "";
+  let color = "";
+
   const userInput = Number(event.target.value);
+
+  if (typeof userInput != "number") {
+    color = "red";
+    message = "No, please enter a number.";
+  }
+
+  if (userInput < 0) {
+    color = "red";
+    message = "No, please enter a positive number.";
+  }
 
   if (isPalindrome(userInput)) {
     msg = "Yes. This is a palindrome!";
-    resultDiv.style.color = 'green';
+    color = "green";
   } else {
     msg = "No. Try again.";
-    color = 'red';
+    color = "red";
   }
+
   resultDiv.textContent = msg;
   resultDiv.style.color = color;
 }
