@@ -22,7 +22,6 @@ function createCard(title, body) {
 }
 
 function handleClick() {
-  console.log("button clicked");
   const characterQuery = userInput.value;
   const matchingCharacters = [];
 
@@ -57,7 +56,7 @@ function handleClick() {
     // split the name and encapsulate the matching name in a mark element
     const title = character.name
       .split(characterQuery)
-      .join(`<mark>${characterQuery}</mark>`);
+      .join(`<span class="bg-warning">${characterQuery}</span>`);
     const body = `Birth year: ${character.birth_year}`;
     createCard(title, body);
   });
