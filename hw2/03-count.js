@@ -4,7 +4,7 @@ const input = document.getElementById("userInput");
 function handleKeyDown(event) {
   const textDiv = document.getElementById("paragraph");
   const textList = textDiv.textContent.split(" ");
-  const userQuery = input.value.toLowerCase();
+  const userQuery = input.value;
 
   if (userQuery === "") {
     textDiv.innerHTML = textDiv.textContent;
@@ -12,12 +12,13 @@ function handleKeyDown(event) {
   }
 
   const highlightedTextList = textList.map((text) => {
-    const lowerCaseText = text.toLowerCase();
+    if (!text.includes(userQuery)) return text;
 
-    if (lowerCaseText.includes(userQuery)) {
-      return text.split(userQuery).join(`<mark>${userQuery}</mark>`);
-    }
-    return text;
+    const highlightedText = text.replace(
+      new RegExp(`\\b${userQuery}\\b`, "gi"), // credit to classmate Sri Lakishma for helping me fix this search using Regex
+      `<span class="bg-warning">${userQuery}</span>`,
+    );
+    return highlightedText;
   });
 
   textDiv.innerHTML = highlightedTextList.join(" ");
